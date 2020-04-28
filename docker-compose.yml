@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  php:
+    build: .docker
+    ports:
+      - 9000:9000
+    volumes:
+      - ./.docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+      - ./.docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./app:/var/www/html
+    restart: unless-stopped
+
+  composer:
+    image: composer
+    volumes:
+      - ./app:/app
+    command: install
+
+  postgres:
+    image: postgres:12.2-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    env_file:
+      - env/.env.db.dev
+    restart: unless-stopped
+
+  web:
+    build: .docker/nginx
+    volumes:
+      - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./app:/var/www/html
+    ports:
+      - 80:80
+    restart: unless-stopped
+    depends_on:
+      - php
+      - postgres
+
+volumes:
+  postgres_data:
