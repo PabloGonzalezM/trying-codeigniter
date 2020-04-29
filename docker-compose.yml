@@ -3,8 +3,6 @@ version: '3.7'
 services:
   php:
     build: .docker
-    ports:
-      - 9000:9000
     volumes:
       - ./.docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
       - ./.docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
