@@ -110,15 +110,17 @@ gen
 !*/cache/index.html
 !*/cache/.htaccess
 
-user_guide_src/build/*
-user_guide_src/cilexer/build/*
-user_guide_src/cilexer/dist/*
-user_guide_src/cilexer/pycilexer.egg-info/*
+/app/user_guide_src/build/*
+/app/user_guide_src/cilexer/build/*
+/app/user_guide_src/cilexer/dist/*
+/app/user_guide_src/cilexer/pycilexer.egg-info/*
 
 #codeigniter 3
-application/logs/*
-!application/logs/index.html
-!application/logs/.htaccess
+/app/application/cache/*
+!/app/application/cache/index.html
+/app/application/logs/*
+!/app/application/logs/index.html
+!/app/application/*/.htaccess
 /app/vendor/
 
 #My files
